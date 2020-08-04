@@ -4,10 +4,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/purecss@2.0.3/build/pure-min.css"
+      integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ"
+      crossorigin="anonymous"
+    />
   </head>
   <body onload="startGame()">
-    <div id="inventory"></div>
-    <div id="log"></div>
+    <div id="buttons" class="center">
+      <button class="pure-button pure-button-primary" onclick="moveLeft()">
+        Left
+      </button>
+      <button class="pure-button pure-button-primary" onclick="moveUp()">
+        Up
+      </button>
+      <button class="pure-button pure-button-primary" onclick="moveDown()">
+        Down
+      </button>
+      <button class="pure-button pure-button-primary" onclick="moveRight()">
+        Right
+      </button>
+    </div>
+    <br />
+    <div id="inventory" class="center"></div>
+    <div id="log" class="center"></div>
     <script src="app.js"></script>
   </body>
 </html>
