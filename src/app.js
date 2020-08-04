@@ -3,7 +3,7 @@ let orcObject;
 let doorObject;
 const pixelSize = 25;
 const canvasWidth = pixelSize * 9 * 2;
-const canvasHeight = pixelSize * 10 * 2;
+const canvasHeight = pixelSize * 9 * 1;
 const components = [];
 const basicGreen = '#095709';
 
