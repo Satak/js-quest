@@ -1,14 +1,8 @@
 #log {
   background-color: lightgray;
   color: black;
-  width: 35em;
   height: 10em;
   overflow: auto;
-}
-
-.center {
-  margin: auto;
-  width: 50%;
 }
 
 canvas {

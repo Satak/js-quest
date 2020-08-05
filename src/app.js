@@ -5,7 +5,7 @@ const pixelSize = 25;
 const canvasWidth = pixelSize * 9 * 2;
 const canvasHeight = pixelSize * 9 * 1;
 const components = [];
-const basicGreen = '#095709';
+const basicGreen = '#095709'; //healthy icon color
 const frameUpdateMS = 10; // update frames every 10 milliseconds
 
 const playerStats = {
@@ -82,12 +82,11 @@ function startGame() {
 }
 
 const gameArea = {
-  canvas: document.createElement('canvas'),
+  canvas: document.getElementById('gameArea'),
   start: function () {
     this.canvas.width = canvasWidth;
     this.canvas.height = canvasHeight;
     this.context = this.canvas.getContext('2d');
-    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     this.interval = setInterval(updateGameArea, frameUpdateMS);
   },
   clear: function () {
