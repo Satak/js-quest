@@ -6,6 +6,7 @@ const canvasWidth = pixelSize * 9 * 2;
 const canvasHeight = pixelSize * 9 * 1;
 const components = [];
 const basicGreen = '#095709';
+const frameUpdateMS = 10; // update frames every 10 milliseconds
 
 const playerStats = {
   name: 'Hero',
@@ -56,16 +57,16 @@ const key = {
 };
 
 function startGame() {
-  playerObject = new component(...Object.values(playerStats));
-  orcObject = new component(...Object.values(orcStats));
-  dragonObject = new component(...Object.values(dragonStats));
-  doorObject = new component(
+  playerObject = new Component(...Object.values(playerStats));
+  orcObject = new Component(...Object.values(orcStats));
+  dragonObject = new Component(...Object.values(dragonStats));
+  doorObject = new Component(
     ...Object.values(door),
     pixelSize * 5,
     pixelSize * 3
   );
 
-  keyObject = new component(
+  keyObject = new Component(
     ...Object.values(key),
     pixelSize * 6,
     pixelSize * 7
@@ -87,38 +88,33 @@ const gameArea = {
     this.canvas.height = canvasHeight;
     this.context = this.canvas.getContext('2d');
     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-    this.interval = setInterval(updateGameArea, 20);
+    this.interval = setInterval(updateGameArea, frameUpdateMS);
   },
   clear: function () {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
   },
 };
 
-function component(
-  name,
-  icon,
-  color,
-  x,
-  y,
-  hp,
-  attackMod,
-  damageMod,
-  defenceMod
-) {
-  this.name = name;
-  this.icon = icon;
-  this.color = color;
-  this.x = x;
-  this.y = y;
-  this.maxHp = hp;
-  this.hp = hp;
-  this.attackMod = attackMod;
-  this.damageMod = damageMod;
-  this.defenceMod = defenceMod;
-  this.block = true;
+class Component {
+  constructor(name, icon, color, x, y, hp, attackMod, damageMod, defenceMod) {
+    this.name = name;
+    this.icon = icon;
+    this.color = color;
+    this.x = x;
+    this.y = y;
+    this.maxHp = hp;
+    this.hp = hp;
+    this.attackMod = attackMod;
+    this.damageMod = damageMod;
+    this.defenceMod = defenceMod;
+    this.block = true;
+    this.inventory = [];
+    this.weapon = null;
+    this.armor = null;
+  }
 
-  this.update = function () {
-    ctx = gameArea.context;
+  update() {
+    const ctx = gameArea.context;
     ctx.fillStyle = this.color;
     ctx.font = `${Math.floor(pixelSize * 0.75)}px Georgia`;
     ctx.textAlign = 'center';
@@ -136,18 +132,10 @@ function component(
         Math.floor(this.y - pixelSize / 3)
       );
     }
-  };
+  }
 
-  this.attack = function (target) {
+  attack(target) {
     if (!target || target.hp <= 0) return;
-
-    // bumps to obstacle
-    if (!target.hp) {
-      log(`${this.name} <strong>bumps</strong> to ${target.name}<br>`);
-      return;
-    }
-
-    // log(`${this.name} <strong>attacks</strong> ${target.name} 🡆 <br>`);
 
     const attackRoll = rollDice(20);
     const attack = attackRoll + this.attackMod;
@@ -156,6 +144,15 @@ function component(
     const hitWord = isCrit ? 'Crit' : 'Hit';
     const hitColor = isCrit ? 'blue' : 'Green';
     const hitDice = isCrit ? 2 : 1;
+    const damageRoll = rollDice(6, hitDice);
+    const damage = damageRoll + this.damageMod;
+    let targetHPLeftPercent;
+
+    // bumps to obstacle
+    if (!target.hp) {
+      log(`${this.name} <strong>bumps</strong> to ${target.name}<br>`);
+      return;
+    }
 
     // misses
     if (!isCrit && attack < defence) {
@@ -165,16 +162,13 @@ function component(
       return true;
     }
 
-    const damageRoll = rollDice(6, hitDice);
-    const damage = damageRoll + this.damageMod;
-
     // hits
     target.hp -= damage;
     log(
       `${this.name} <strong style="color: ${hitColor}">${hitWord} ${damage}</strong> ${target.name} (${attack}/${defence}). ${target.name} HP: ${target.hp}/${target.maxHp}<br>`
     );
 
-    const targetHPLeftPercent = Math.floor((target.hp / target.maxHp) * 100);
+    targetHPLeftPercent = Math.floor((target.hp / target.maxHp) * 100);
 
     // change color if target is wounded
     if (targetHPLeftPercent <= 10) {
@@ -196,8 +190,9 @@ function component(
 
       log(`${target.name} is <strong style="color: red">dead</strong><br>`);
     }
+
     return true;
-  };
+  }
 }
 
 function rollDice(side, dice) {
