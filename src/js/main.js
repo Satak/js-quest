@@ -8,6 +8,8 @@ function startGame() {
   const key = new Component(...Object.values(keyStats));
   const ring = new Ring(...Object.values(ringStats));
   const potion = new HealthPotion(...Object.values(hpPotion));
+  const sword = new Weapon(...Object.values(swordStats));
+  const shield = new Armor(...Object.values(shieldStats));
 
   dragon.gold = 100;
   dragon.xp = 50;
@@ -19,5 +21,11 @@ function startGame() {
   door.x = pixelSize * 5;
   door.y = pixelSize * 3;
 
-  gameArea.components = [orc, dragon, door, player];
+  sword.x = pixelSize * 1;
+  sword.y = pixelSize * 2;
+
+  shield.x = pixelSize * 1;
+  shield.y = pixelSize * 3;
+
+  gameArea.components = [orc, dragon, door, sword, shield, player];
 }

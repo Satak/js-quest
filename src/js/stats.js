@@ -46,6 +46,25 @@ const keyStats = {
   color: 'black',
 };
 
+const swordStats = {
+  name: 'Sword',
+  icon: '🗡️',
+  color: 'black',
+  attackMod: 2,
+  damageMod: 2,
+  defenceMod: 2,
+  attackDice: 2,
+};
+
+const shieldStats = {
+  name: 'Shield',
+  icon: '🛡️',
+  color: 'black',
+  attackMod: 0,
+  damageMod: 0,
+  defenceMod: 3,
+};
+
 const ringStats = {
   name: 'Mystic Ring',
   icon: '💍',

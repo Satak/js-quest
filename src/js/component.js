@@ -45,6 +45,31 @@ class HealthPotion extends Component {
   constructor(name, icon, color, heal) {
     super(name, icon, color);
     this.heal = heal;
+    this.block = false;
+    this.canPickUp = true;
+  }
+}
+
+class Weapon extends Component {
+  constructor(name, icon, color, attackMod, damageMod, defenceMod, attackDice) {
+    super(name, icon, color);
+    this.attackMod = attackMod;
+    this.damageMod = damageMod;
+    this.defenceMod = defenceMod;
+    this.attackDice = attackDice || 1;
+    this.block = false;
+    this.canPickUp = true;
+  }
+}
+
+class Armor extends Component {
+  constructor(name, icon, color, attackMod, damageMod, defenceMod) {
+    super(name, icon, color);
+    this.attackMod = attackMod;
+    this.damageMod = damageMod;
+    this.defenceMod = defenceMod;
+    this.block = false;
+    this.canPickUp = true;
   }
 }
 
