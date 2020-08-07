@@ -41,6 +41,13 @@ class Ring extends Component {
   }
 }
 
+class HealthPotion extends Component {
+  constructor(name, icon, color, heal) {
+    super(name, icon, color);
+    this.heal = heal;
+  }
+}
+
 class Character extends Component {
   constructor(name, icon, color, x, y, hp, attackMod, damageMod, defenceMod) {
     super(name, icon, color, x, y);
@@ -92,18 +99,7 @@ class Character extends Component {
       `${this.name} <strong style="color: ${hitColor}">${hitWord} ${damage}</strong> ${target.name} (${attack}/${defence}). ${target.name} HP: ${target.hp}/${target.maxHp}<br>`
     );
 
-    targetHPLeftPercent = Math.floor((target.hp / target.maxHp) * 100);
-
-    // change color if target is wounded
-    if (targetHPLeftPercent <= 10) {
-      target.color = '#570909';
-    } else if (targetHPLeftPercent <= 25) {
-      target.color = 'red';
-    } else if (targetHPLeftPercent <= 50) {
-      target.color = '#DF9922';
-    } else if (targetHPLeftPercent <= 75) {
-      target.color = '#D9DA65';
-    }
+    target.updateColor();
 
     // target is dead
     if (target.hp <= 0) {
@@ -123,6 +119,23 @@ class Character extends Component {
     }
 
     return true;
+  }
+
+  updateColor() {
+    const hpLeftPercent = Math.floor((this.hp / this.maxHp) * 100);
+
+    // change color if wounded
+    if (hpLeftPercent <= 10) {
+      this.color = '#570909';
+    } else if (hpLeftPercent <= 25) {
+      this.color = 'red';
+    } else if (hpLeftPercent <= 50) {
+      this.color = '#DF9922';
+    } else if (hpLeftPercent <= 75) {
+      this.color = '#D9DA65';
+    } else if (this.color !== basicGreen) {
+      this.color = basicGreen;
+    }
   }
 
   move(x, y) {
@@ -169,6 +182,18 @@ class Player extends Character {
     this.inventory.forEach((item) => {
       log(`Inv: ${item.name} ${item.icon}<br>`);
       console.table(item);
+    });
+  }
+
+  heal() {
+    this.inventory.forEach((item) => {
+      if (typeof HealthPotion) {
+        log(
+          `${this.name} drink ${item.name} ${item.icon} (+${item.heal} HP)<br>`
+        );
+        this.hp += item.heal;
+        this.updateColor();
+      }
     });
   }
 }

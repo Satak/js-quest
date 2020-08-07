@@ -14,8 +14,8 @@ const orcStats = {
   name: 'Orc',
   icon: '👹',
   color: basicGreen,
-  x: pixelSize * 3,
-  y: pixelSize * 3,
+  x: pixelSize * 2,
+  y: pixelSize * 1,
   hp: 15,
   attackMod: -1,
   damageMod: 1,
@@ -54,4 +54,11 @@ const ringStats = {
   damageMod: 5,
   defenceMod: 5,
   maxHPMod: 30,
+};
+
+const hpPotion = {
+  name: 'Health Potion',
+  icon: '🧪',
+  color: 'black',
+  heal: 10,
 };

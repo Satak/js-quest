@@ -7,11 +7,12 @@ function startGame() {
   const door = new Component(...Object.values(doorStats));
   const key = new Component(...Object.values(keyStats));
   const ring = new Ring(...Object.values(ringStats));
+  const potion = new HealthPotion(...Object.values(hpPotion));
 
   dragon.gold = 100;
   dragon.xp = 50;
 
-  orc.inventory = [ring, key];
+  orc.inventory = [ring, key, potion];
   orc.xp = 10;
   orc.gold = 5;
 

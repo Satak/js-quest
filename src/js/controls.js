@@ -22,6 +22,10 @@ function showInventory() {
   player.showInventory();
 }
 
+function heal() {
+  player.heal();
+}
+
 function checkKey(e) {
   e = e || window.event;
   const actionMap = {
@@ -32,6 +36,7 @@ function checkKey(e) {
     '80': () => player.pickUp(), // p key to Pick Up items
     '73': () => player.showInventory(), // i key to show inventory
     '71': () => console.table(gameArea.components), // g key to show game components in console.table
+    '72': () => player.heal(), // h key to drink health potion
   };
 
   const action = actionMap[e.keyCode];
