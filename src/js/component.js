@@ -187,7 +187,7 @@ class Player extends Character {
 
   heal() {
     this.inventory.forEach((item) => {
-      if (typeof HealthPotion) {
+      if (item instanceof HealthPotion) {
         log(
           `${this.name} drink ${item.name} ${item.icon} (+${item.heal} HP)<br>`
         );
