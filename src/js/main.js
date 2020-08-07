@@ -54,6 +54,22 @@ function updateGameArea() {
   components.forEach((comp) => comp.update());
 }
 
+function moveLeft() {
+  playerObject.move(-pixelSize, 0);
+}
+
+function moveRight() {
+  playerObject.move(pixelSize, 0);
+}
+
+function moveUp() {
+  playerObject.move(0, -pixelSize);
+}
+
+function moveDown() {
+  playerObject.move(0, pixelSize);
+}
+
 function checkKey(e) {
   e = e || window.event;
   const actionMap = {
