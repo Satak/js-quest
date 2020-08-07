@@ -122,7 +122,7 @@ class Character extends Component {
   }
 
   getCollision(x, y) {
-    return components.filter(
+    return gameArea.components.filter(
       (comp) => comp.x === x && comp.y === y && comp !== this
     )[0];
   }
@@ -143,7 +143,7 @@ class Player extends Character {
     if (item) {
       alert(`You picked up ${item.name}`);
       this.inventory.push(item);
-      components.splice(components.indexOf(item), 1);
+      gameArea.components.splice(gameArea.components.indexOf(item), 1);
     }
   }
 

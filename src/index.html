@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body onload="startGame()">
@@ -21,28 +21,25 @@
     </div>
     <div class="row justify-content-md-center">
       <div class="col-md-auto">
-        <button type="button" class="btn btn-dark" onclick="moveLeft()">
-          Left
-        </button>
-        <button type="button" class="btn btn-dark" onclick="moveDown()">
-          Down
-        </button>
-        <button type="button" class="btn btn-dark" onclick="moveUp()">
-          Up
-        </button>
-        <button type="button" class="btn btn-dark" onclick="moveRight()">
-          Right
-        </button>
+        <button type="button" class="btn btn-dark" onclick="moveLeft()">Left</button>
+        <button type="button" class="btn btn-dark" onclick="moveDown()">Down</button>
+        <button type="button" class="btn btn-dark" onclick="moveUp()">Up</button>
+        <button type="button" class="btn btn-dark" onclick="moveRight()">Right</button>
       </div>
     </div>
     <div class="row justify-content-md-center">
       <div class="col-md-auto" id="log"></div>
     </div>
   </div>
-  <script src="/js/main.js"></script>
-  <script src="/js/component.js"></script>
-  <script src="/js/stats.js"></script>
+
   <script src="/js/common.js"></script>
+  <script src="/js/controls.js"></script>
+  <script src="/js/config.js"></script>
+  <script src="/js/stats.js"></script>
+  <script src="/js/component.js"></script>
+  <script src="/js/gameArea.js"></script>
+  <script src="/js/main.js"></script>
+
 </body>
 
 </html>

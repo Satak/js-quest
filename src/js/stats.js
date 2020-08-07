@@ -34,13 +34,13 @@ const dragonStats = {
   defenceMod: 3,
 };
 
-const door = {
+const doorStats = {
   name: 'Door',
   icon: '🚪',
   color: 'black',
 };
 
-const key = {
+const keyStats = {
   name: 'Key',
   icon: '🔑',
   color: 'black',
