@@ -6,7 +6,6 @@ class GameArea {
     this.context = this.canvas.getContext('2d');
     this.interval = setInterval(this.update.bind(this), frameRate);
     this.components = [];
-    this.self;
   }
 
   clear() {
