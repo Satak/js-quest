@@ -140,8 +140,8 @@ class Player extends Character {
   pickUp() {
     const item = this.getCollision(this.x, this.y);
 
-    if (item) {
-      alert(`You picked up ${item.name}`);
+    if (item && item.canPickUp) {
+      log(`${this.name} picked up a ${item.name}`);
       this.inventory.push(item);
       gameArea.components.splice(gameArea.components.indexOf(item), 1);
     }

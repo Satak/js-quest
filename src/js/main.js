@@ -12,11 +12,8 @@ function startGame() {
 
   key.x = pixelSize * 6;
   key.y = pixelSize * 7;
-
   key.block = false;
   key.canPickUp = true;
 
-  [orc, dragon, door, key, player].forEach((item) =>
-    gameArea.components.push(item)
-  );
+  gameArea.components = [orc, dragon, door, key, player];
 }
