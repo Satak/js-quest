@@ -31,6 +31,16 @@ class Component {
   }
 }
 
+class Ring extends Component {
+  constructor(name, icon, color, attackMod, damageMod, defenceMod, maxHPMod) {
+    super(name, icon, color);
+    this.attackMod = attackMod;
+    this.damageMod = damageMod;
+    this.defenceMod = defenceMod;
+    this.maxHPMod = maxHPMod;
+  }
+}
+
 class Character extends Component {
   constructor(name, icon, color, x, y, hp, attackMod, damageMod, defenceMod) {
     super(name, icon, color, x, y);
@@ -43,6 +53,7 @@ class Character extends Component {
     this.inventory = [];
     this.weapon = null;
     this.armor = null;
+    this.ring = null;
     this.gold = 0;
     this.xp = 0;
   }
@@ -96,10 +107,17 @@ class Character extends Component {
 
     // target is dead
     if (target.hp <= 0) {
-      target.color = 'grey';
-      target.icon = '💀';
-      target.block = false;
-      target.hp = 0;
+      this.xp += target.xp;
+      this.gold += target.gold;
+      target.inventory.forEach((item, index) => {
+        item.x = target.x + pixelSize * index;
+        item.y = target.y;
+        item.canPickUp = true;
+        item.block = false;
+        gameArea.components.unshift(item);
+      });
+
+      gameArea.components.splice(gameArea.components.indexOf(target), 1);
 
       log(`${target.name} is <strong style="color: red">dead</strong><br>`);
     }
@@ -141,13 +159,16 @@ class Player extends Character {
     const item = this.getCollision(this.x, this.y);
 
     if (item && item.canPickUp) {
-      log(`${this.name} picked up a ${item.name}`);
-      this.inventory.push(item);
+      log(`${this.name} picked up a ${item.name} ${item.icon}<br>`);
+      this.inventory.unshift(item);
       gameArea.components.splice(gameArea.components.indexOf(item), 1);
     }
   }
 
   showInventory() {
-    console.table(this.inventory);
+    this.inventory.forEach((item) => {
+      log(`Inv: ${item.name} ${item.icon}<br>`);
+      console.table(item);
+    });
   }
 }

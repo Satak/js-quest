@@ -6,14 +6,17 @@ function startGame() {
   const dragon = new Character(...Object.values(dragonStats));
   const door = new Component(...Object.values(doorStats));
   const key = new Component(...Object.values(keyStats));
+  const ring = new Ring(...Object.values(ringStats));
+
+  dragon.gold = 100;
+  dragon.xp = 50;
+
+  orc.inventory = [ring, key];
+  orc.xp = 10;
+  orc.gold = 5;
 
   door.x = pixelSize * 5;
   door.y = pixelSize * 3;
 
-  key.x = pixelSize * 6;
-  key.y = pixelSize * 7;
-  key.block = false;
-  key.canPickUp = true;
-
-  gameArea.components = [orc, dragon, door, key, player];
+  gameArea.components = [orc, dragon, door, player];
 }

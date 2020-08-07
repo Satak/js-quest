@@ -45,3 +45,13 @@ const keyStats = {
   icon: '🔑',
   color: 'black',
 };
+
+const ringStats = {
+  name: 'Mystic Ring',
+  icon: '💍',
+  color: 'black',
+  attackMod: 2,
+  damageMod: 5,
+  defenceMod: 5,
+  maxHPMod: 30,
+};
